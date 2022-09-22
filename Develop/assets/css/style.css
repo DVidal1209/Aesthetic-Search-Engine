@@ -1,0 +1,20 @@
+body{
+    display:flex;
+    background-color: cadetblue;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    margin:auto;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+#searchBtn{
+    background-color: greenyellow;
+}
