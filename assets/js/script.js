@@ -4,31 +4,22 @@ btnSearch.on("click", function(e){
     document.getElementById("searchResults").innerHTML="";
     var search = document.getElementById("search");
     var results = document.getElementById("searchResults");
-    // Youtube API call
-    // fetch('https://youtube.googleapis.com/youtube/v3/search?q='+ search.value + '&type=video&key=AIzaSyBM_6wUXV8lxTERcx1o0Gu144Zb18TsCbk')
-    // .then(function(response){
-    //     return response.json();
-    // })
-    // .then(function(data){
-    //     console.log(data.items.length, data);
-    //     for (var i=0; i<data.items.length; i++){
-    //         var item = document.createElement("embed");
-    //         item.setAttribute("src", "https://www.youtube.com/embed/" + data.items[i].id.videoId);
-    //         // console.log("https://www.youtube.com/watch?v=" + data.items[i].id.videoId);
-    //         // results.appendChild(item);
-    //         console.log(item)
-    //     }
-    // })
+    
     // Giphy API call
     fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + search.value + "&limit=20&offset=0&rating=g&lang=en")
     .then(function(response){
         return response.json()
     })
     .then(function(data){
+        console.log(data)
         for (i=0; i<data.data.length; i++){
             var item = document.createElement("embed");
-            // console.log(data.data[i].embed_url);
             item.setAttribute("src", data.data[i].embed_url);
+            // item.setAttribute("data-source", data.data[i].
+            item.addEventListener("click", function(event){
+                event.preventDefault();
+                window.open(this.getAttribute("src"), "_blank")
+            })
             results.appendChild(item);
         }
     })
@@ -38,22 +29,29 @@ btnSearch.on("click", function(e){
         return response.json()
     })
     .then (function(e){
-        console.log(e)
-        // console.log(e.data.length)
-        // for(i=0;i<e.data.length;i++){
-        //     try{
-        //         for(v=0;v<e.data[i].images.length;v++){
-        //             var item = document.createElement("embed");
-        //             item.setAttribute("src", e.data[i].images[v].link)
-        //             results.appendChild(item);
-        //         }
-        //     }
-        //     catch{
-        //         console.log("No images found", e.data[i]);
-        //         var item = document.createElement("embed");
-        //         item.setAttribute("src", e.data[i].link)
-        //         results.appendChild(item);
-        //     }
-        // }
+        console.log(e.data.length)
+        for(var i=0;i<e.data.length;i++){
+            try{
+                for(var v=0;v<e.data[i].images.length;v++){
+                    var item = document.createElement("embed");
+                    item.setAttribute("src", e.data[i].images[v].link)
+                    item.addEventListener("click", function(event){
+                        event.preventDefault();
+                        window.open(this.getAttribute("src"), "_blank")
+                    })
+                    results.appendChild(item);
+                }
+            }
+            catch{
+                console.log("No images found", e.data[i]);
+                var item = document.createElement("embed");
+                item.setAttribute("src", e.data[i].link)
+                item.addEventListener("click", function(event){
+                    event.preventDefault();
+                    window.open(this.getAttribute("src"), "_blank")
+                })
+                results.appendChild(item);
+            }
+        }
     })
 })
