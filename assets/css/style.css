@@ -1,3 +1,4 @@
+/* Adjusts the background color of the page as well as the entire pages left and right borders.*/
 body {
     background-color: lavenderblush;
     margin:0;
@@ -9,6 +10,7 @@ body {
     border-color: lightskyblue;
 }
 
+/* Adjusts the font of "Aesthetic Search Engine" is adjusted as well as the background color of the header section*/
 .header {
     display:flex;
     justify-content: flex-start;
@@ -18,6 +20,7 @@ body {
     color: lavenderblush;
 }
 
+/* Adjusts where the spacing between the hero images is adjusted as well as the bottom border under them.*/
 .hero {
     display:flex;
     justify-content: space-evenly;
@@ -26,6 +29,7 @@ body {
     border-color: lightskyblue;
 }
 
+/* Adjusts the border to the left and right of each image in the hero banner.*/
 .hero img {
     border-right-style:solid;
     border-left-style:solid;
@@ -33,28 +37,33 @@ body {
     border-color: lightskyblue;
 }
 
+/* This is where the main content of the page will be adjusted and fit onto the rest of the page when it's ready.*/
 .content {
     display:flex;
     height: 1000px;
 }
 
+/* Adjusts the background color of the footer section and sets its contents toward the end of the footer.*/
 .footer {
     display:flex;
     justify-content: flex-end;
     background-color: lightskyblue;
 }
 
+/* Centers the contents of the footer from the top and bottom.*/
 .footer .footer-right {
     display:flex;
     justify-content: space-evenly;
     align-items:center;
 }
 
+/* Adjusts the font size of "Contact Us" and applies padding between the h3 and a elements in the footer.*/
 .footer-right h3 {
     padding-right:10px;
     font-size:22px;
 }
 
+/* Adjusts the font size and weight of "Email" and "Return To Top." It also applies padding between those two and well as the end of the page.*/
 .footer-right a {
     padding-right:25px;
     font-size:19px;
