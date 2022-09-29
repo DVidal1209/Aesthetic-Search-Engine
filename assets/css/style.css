@@ -5,7 +5,7 @@
 :root {
     --primary-color: rgb(97, 2, 97);
     --secondary-color: navy;
-    --text-color: ;
+    --text-color: pink;
 }
 
 
@@ -27,7 +27,7 @@
 }
 
 /* Styling for each embedded image/gif/video */
-embed{
+embed {
     width: 19%;
     margin: 5px;
 }

@@ -1,3 +1,6 @@
+// Adding local storage
+var previousMedia = [];
+var previousKeyword = [];
 var btnSearch = document.getElementById("searchBtn");
 
 // Search Button Event Listener
@@ -55,4 +58,14 @@ btnSearch.addEventListener("click", function(e){
             window.open(event.target.getAttribute("src", "_blank"));
         }
     })
+
+    //Add local storage for previous searches (keywords and drop-down menu items)
+    previousMedia.unshift(format.value);
+    localStorage.setItem("previousMedia", JSON.stringify([previousMedia]));
+
+
+    previousKeyword.unshift(search.value);
+    localStorage.setItem("previousKeyword", JSON.stringify([previousKeyword]));
 })
+
+
