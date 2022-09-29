@@ -5,9 +5,11 @@
 :root {
     --primary-color: rgb(97, 2, 97);
     --secondary-color: navy;
-    --text-coolor
+    --text-color: ;
 }
 
+
+/* Styling for  Search Area */
 .container {
     display: flex;
     background-color: var(--primary-color);
@@ -16,4 +18,21 @@
     margin: 10px;
     justify-content: center;
     flex-direction: column;
+}
+
+
+/* Search Button styling */
+#searchBtn{
+    background-color: lightblue;
+}
+
+/* Styling for each embedded image/gif/video */
+embed{
+    width: 19%;
+    margin: 5px;
+}
+
+/* Styling for the search results */
+#searchResults{
+    margin: 10px 10px 10px 10px;
 }
