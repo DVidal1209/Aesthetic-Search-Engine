@@ -1,25 +1,21 @@
-var btnSearch = $("#searchBtn");
-btnSearch.on("click", function(e){
+var btnSearch = document.getElementById("searchBtn");
+btnSearch.addEventListener("click", function(e){
     e.preventDefault();
     document.getElementById("searchResults").innerHTML="";
     var search = document.getElementById("search");
     var results = document.getElementById("searchResults");
-    
+
     // Giphy API call
     fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + search.value + "&limit=20&offset=0&rating=g&lang=en")
     .then(function(response){
         return response.json()
     })
     .then(function(data){
-        console.log(data)
+        // Create embed gifs from GIPHY
         for (i=0; i<data.data.length; i++){
             var item = document.createElement("embed");
             item.setAttribute("src", data.data[i].embed_url);
-            // item.setAttribute("data-source", data.data[i].
-            item.addEventListener("click", function(event){
-                event.preventDefault();
-                window.open(this.getAttribute("src"), "_blank")
-            })
+            item.setAttribute("class", "emb");
             results.appendChild(item);
         }
     })
@@ -29,29 +25,31 @@ btnSearch.on("click", function(e){
         return response.json()
     })
     .then (function(e){
-        console.log(e.data.length)
         for(var i=0;i<e.data.length;i++){
             try{
+                // Create embed images from Imgur album
                 for(var v=0;v<e.data[i].images.length;v++){
                     var item = document.createElement("embed");
-                    item.setAttribute("src", e.data[i].images[v].link)
-                    item.addEventListener("click", function(event){
-                        event.preventDefault();
-                        window.open(this.getAttribute("src"), "_blank")
-                    })
+                    item.setAttribute("src", e.data[i].images[v].link);
+                    item.setAttribute("class", "emb");
                     results.appendChild(item);
                 }
             }
             catch{
-                console.log("No images found", e.data[i]);
+                // Create embed images from Imgur Image
                 var item = document.createElement("embed");
-                item.setAttribute("src", e.data[i].link)
-                item.addEventListener("click", function(event){
-                    event.preventDefault();
-                    window.open(this.getAttribute("src"), "_blank")
-                })
+                item.setAttribute("src", e.data[i].link);
+                item.setAttribute("class", "emb");
                 results.appendChild(item);
             }
+        }
+    })
+
+    // Click handler to open image on click in new tab
+    results.addEventListener("click", function(event){
+        event.preventDefault()
+        if(event.target.classList.contains("emb")){
+            window.open(event.target.getAttribute("src", "_blank"));
         }
     })
 })
