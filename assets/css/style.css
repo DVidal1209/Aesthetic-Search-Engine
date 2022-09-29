@@ -1,33 +1,38 @@
-body{
-    display:flex;
-    background-color: violet;
-    flex-direction: column;
+/*do I need this to use Bulma?
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+*/
+
+:root {
+    --primary-color: rgb(97, 2, 97);
+    --secondary-color: navy;
+    --text-color: ;
 }
 
-.container{
-    display:flex;
-    flex-direction: column;
-    background-color: antiquewhite;
-    margin: auto;
-    margin-top: 10%;
-}
 
-h2{
+/* Styling for  Search Area */
+.container {
     display: flex;
+    background-color: var(--primary-color);
+    border: 10px;
+    padding: 10px;
+    margin: 10px;
     justify-content: center;
+    flex-direction: column;
 }
 
+
+/* Search Button styling */
 #searchBtn{
     background-color: lightblue;
 }
 
+/* Styling for each embedded image/gif/video */
 embed{
     width: 19%;
     margin: 5px;
 }
 
-
+/* Styling for the search results */
 #searchResults{
-    background-color: blue;
     margin: 10px 10px 10px 10px;
 }
