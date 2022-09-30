@@ -1,29 +1,78 @@
-/*do I need this to use Bulma?
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-*/
-
-:root {
-    --primary-color: rgb(97, 2, 97);
-    --secondary-color: navy;
-    --text-color: pink;
+/* Adjusts the background color of the page as well as the entire pages left and right borders.*/
+body {
+    background-color: lavenderblush;
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
 }
 
+/* Adjusts the font of "Aesthetic Search Engine" is adjusted as well as the background color of the header section*/
+header {
+    display:flex;
+    justify-content: flex-start;
+    padding-left: 25px;
+    font-size: 40px;
+    background-color: lightskyblue;
+    color: lavenderblush;
+}
+
+/* Adjusts where the spacing between the hero images is adjusted as well as the bottom border under them.*/
+.banner {
+    display:flex;
+    justify-content: space-evenly;
+    border-right-style:solid;
+    border-left-style:solid;
+    border-bottom-style:solid;
+    border-width: 8px;
+    border-color: lightskyblue;
+    margin-bottom: 10px;
+    height: 200px;
+}
+
+/* Adjusts the border to the left and right of each image in the banner.*/
+.banner img {
+    border-right-style:solid;
+    border-left-style:solid;
+    border-width: 8px;
+    border-color: lightskyblue;
+}
 
 /* Styling for  Search Area */
 .container {
     display: flex;
-    background-color: var(--primary-color);
-    border: 10px;
+    background-color: lightskyblue;
+    color: lavenderblush;
+    border-width: 8px;
     padding: 10px;
     margin: 10px;
     justify-content: center;
     flex-direction: column;
 }
 
+/* Adjusts the font size of h2 Aesthetic Search Engine in containter.*/
+.container h2 {
+    font-size: 30px;
+}
 
+/* Adjusts the font size and color of the input and select elements. Also puts some spacing between their boxes.*/
+.container input, select {
+    font-size: 25px;
+    background-color: lavenderblush;
+    color: lightskyblue;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+/* Adjusts the font color of the placeholder text*/
+::placeholder {
+    color: lightskyblue;
+}
 /* Search Button styling */
-#searchBtn{
-    background-color: lightblue;
+#searchBtn {
+    background-color: lavenderblush;
+    color: lightskyblue;
+    font-size: 25px;
+    margin: 10px 0;
 }
 
 /* Styling for each embedded image/gif/video */
@@ -33,6 +82,36 @@ embed {
 }
 
 /* Styling for the search results */
-#searchResults{
+#searchResults {
     margin: 10px 10px 10px 10px;
 }
+
+/* Adjusts the background color of the footer section and sets its contents toward the end of the footer.*/
+footer {
+    display:flex;
+    background-color: lightskyblue;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+/* Centers the contents of the footer from the top and bottom.*/
+footer .footer-right {
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+}
+
+/* Adjusts the font size of "Contact Us" and applies padding between the h3 and a elements in the footer.*/
+.footer-right h3 {
+    padding-right:10px;
+    font-size:22px;
+}
+
+/* Adjusts the font size and weight of "Email" and "Return To Top." It also applies padding between those two and well as the end of the page.*/
+.footer-right a {
+    padding-right:25px;
+    font-size:19px;
+    font-weight: 550;
+}
+
