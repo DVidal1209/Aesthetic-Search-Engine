@@ -14,6 +14,7 @@ function search(e){
 
 
     if (e.target.classList.contains("previousSearch")){
+
         search.value = e.target.dataset.search;
         format.value = e.target.dataset.format; 
     }
@@ -37,22 +38,26 @@ function search(e){
         return response.json()
     })
     .then (function(e){
-        for(var i=0;i<e.data.length;i++){
+        for(var i=0; i<20; i++){
             try{
                 // Create embed images from Imgur album
-                for(var v=0;v<e.data[i].images.length;v++){
+                if (e.data[i].link){
+                    // Create embed images from Imgur Image
                     var item = document.createElement("embed");
-                    item.setAttribute("src", e.data[i].images[v].link);
+                    item.setAttribute("src", e.data[i].link);
                     item.setAttribute("class", "emb");
                     results.appendChild(item);
+                } else {
+                    for(var v=0;v<e.data[i].images.length;v++){
+                        var item = document.createElement("embed");
+                        item.setAttribute("src", e.data[i].images[v].link);
+                        item.setAttribute("class", "emb");
+                        results.appendChild(item);
+                    }
                 }
             }
             catch{
-                // Create embed images from Imgur Image
-                var item = document.createElement("embed");
-                item.setAttribute("src", e.data[i].link);
-                item.setAttribute("class", "emb");
-                results.appendChild(item);
+                return;
             }
         }
     })
@@ -68,10 +73,12 @@ function search(e){
     //Add local storage for previous searches (keywords and drop-down menu items)
     previousMedia.unshift(format.value);
     localStorage.setItem("previousMedia", JSON.stringify(previousMedia));
-
+    console.log("saved format")
     previousKeyword.unshift(search.value);
     localStorage.setItem("previousKeyword", JSON.stringify(previousKeyword));
+    console.log("saved keyword")
     
+    historyEl.innerHTML = "";
     for (i=0; i<previousKeyword.length;i++){
         var btn = document.createElement("button");
         btn.setAttribute("class", "previousSearch");
@@ -100,6 +107,7 @@ function init(){
     }
 }
 
+console.log("init")
 init()
 
 // Search Button Event Listener
