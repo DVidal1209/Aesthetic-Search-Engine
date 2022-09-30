@@ -37,10 +37,51 @@ body {
     border-color: lightskyblue;
 }
 
-/* This is where the main content of the page will be adjusted and fit onto the rest of the page when it's ready.*/
+/* This is where the main content of the page will be adjusted and fit onto the rest of the page when it's ready.
 .content {
     display:flex;
-    height: 1000px;
+} */
+
+/* Styling for  Search Area */
+.container {
+    display: flex;
+    background-color: lightskyblue;
+    color: lavenderblush;
+    border-width: 8px;
+    padding: 10px;
+    margin: 10px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container h2 {
+    font-size: 30px;
+}
+
+.container input, select {
+    font-size: 25px;
+    background-color: lavenderblush;
+    color: lightskyblue;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+/* Search Button styling */
+#searchBtn {
+    background-color: lavenderblush;
+    color: lightskyblue;
+    font-size: 25px;
+    margin: 10px 0;
+}
+
+/* Styling for each embedded image/gif/video */
+embed {
+    width: 19%;
+    margin: 5px;
+}
+
+/* Styling for the search results */
+#searchResults {
+    margin: 10px 10px 10px 10px;
 }
 
 /* Adjusts the background color of the footer section and sets its contents toward the end of the footer.*/
@@ -69,3 +110,7 @@ body {
     font-size:19px;
     font-weight: 550;
 }
+
+/*do I need this to use Bulma?
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+*/

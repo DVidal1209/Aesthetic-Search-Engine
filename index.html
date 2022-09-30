@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">-->
     <title>Aesthetic Search Engine</title>
 
 	<!--Additional elements for browsers and robots go here goes here-->
@@ -35,7 +36,19 @@
 
     <!-- Content -->
     <section class="content">
-        
+        <div class="container">
+            <h2>Aesthetic Search Engine</h2>
+            <input type="text" placeholder="Enter keywords here..." id="search">
+            <select name="format" id="format">
+                <option value="select">Select a media type...</option>
+                <option value="pictures">Pictures</option>
+                <option value="gifs">Gifs</option>
+                <option value="landscapes">Landscapes</option>
+                <option value="paintings">Paintings</option>
+            </select>
+            <button id="searchBtn">Search</button>
+        </div>
+        <div id="searchResults"></div>       
     </section>
 
     <!-- Footer. Font color of h3 and the href tags adjusted here instead of css.-->
