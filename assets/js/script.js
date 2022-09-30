@@ -2,7 +2,7 @@
 var previousMedia = [];
 var previousKeyword = [];
 var btnSearch = document.getElementById("searchBtn");
-
+var historyEl = document.getElementById("history");
 
 //Search Function
 function search(e){
@@ -12,6 +12,11 @@ function search(e){
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
 
+
+    if (e.target.classList.contains("previousSearch")){
+        search.value = e.target.dataset.search;
+        format.value = e.target.dataset.format; 
+    }
     // Giphy API call
     fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + search.value + "%20" +format.value + "&limit=20&offset=0&rating=g&lang=en")
     .then(function(response){
@@ -62,14 +67,46 @@ function search(e){
 
     //Add local storage for previous searches (keywords and drop-down menu items)
     previousMedia.unshift(format.value);
-    localStorage.setItem("previousMedia", JSON.stringify([previousMedia]));
-
+    localStorage.setItem("previousMedia", JSON.stringify(previousMedia));
 
     previousKeyword.unshift(search.value);
-    localStorage.setItem("previousKeyword", JSON.stringify([previousKeyword]));
+    localStorage.setItem("previousKeyword", JSON.stringify(previousKeyword));
+    
+    var btn = document.createElement("button");
+    btn.setAttribute("class", "previousSearch");
+    btn.innerHTML = (search.value + "<br>Format: " + format.value);
+    btn.setAttribute("data-format", format.value);
+    btn.setAttribute("data-search", search.value);
+    historyEl.appendChild(btn);
 }
 
+
+function init(){
+    if(localStorage.previousKeyword === null && localStorage.previousKeyword === undefined){
+        return;
+    } else {
+        previousKeyword = JSON.parse(localStorage.getItem("previousKeyword"));
+        previousMedia = JSON.parse(localStorage.getItem("previousMedia"));
+        for (i=0; i<previousKeyword.length;i++){
+            var btn = document.createElement("button");
+            btn.setAttribute("class", "previousSearch");
+            btn.innerHTML = (previousKeyword[i] + "<br>Format: " + previousMedia[i]);
+            btn.setAttribute("data-format", previousMedia[i]);
+            btn.setAttribute("data-search", previousKeyword[i]);
+            historyEl.appendChild(btn);
+        }
+    }
+}
+
+init()
+
 // Search Button Event Listener
-btnSearch.addEventListener("click", search)
+btnSearch.addEventListener("click", search);
 
-
+// History button listener
+historyEl.addEventListener("click", function(event){
+    event.preventDefault();
+    if (event.target.classList.contains("previousSearch")){
+        search(event);
+    }
+})
