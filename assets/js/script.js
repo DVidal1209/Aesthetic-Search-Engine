@@ -72,17 +72,19 @@ function search(e){
     previousKeyword.unshift(search.value);
     localStorage.setItem("previousKeyword", JSON.stringify(previousKeyword));
     
-    var btn = document.createElement("button");
-    btn.setAttribute("class", "previousSearch");
-    btn.innerHTML = (search.value + "<br>Format: " + format.value);
-    btn.setAttribute("data-format", format.value);
-    btn.setAttribute("data-search", search.value);
-    historyEl.appendChild(btn);
+    for (i=0; i<previousKeyword.length;i++){
+        var btn = document.createElement("button");
+        btn.setAttribute("class", "previousSearch");
+        btn.innerHTML = (previousKeyword[i] + "<br>Format: " + previousMedia[i]);
+        btn.setAttribute("data-format", previousMedia[i]);
+        btn.setAttribute("data-search", previousKeyword[i]);
+        historyEl.appendChild(btn);
+    }
 }
 
 
 function init(){
-    if(localStorage.previousKeyword === null && localStorage.previousKeyword === undefined){
+    if(localStorage.previousKeyword === null || localStorage.previousKeyword === undefined){
         return;
     } else {
         previousKeyword = JSON.parse(localStorage.getItem("previousKeyword"));
