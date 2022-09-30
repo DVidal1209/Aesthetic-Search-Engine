@@ -126,7 +126,7 @@ historyEl.addEventListener("click", function(event){
         spanContent.setAttribute("class", "historyContent");
         var resetBtn = document.createElement("button");
         resetBtn.setAttribute("class", "reset");
-        resetBtn.innerHTML = "Reset";
+        resetBtn.innerHTML = "Clear History";
         localStorage.removeItem("previousMedia");
         localStorage.removeItem("previousKeyword");
         previousMedia = [];
