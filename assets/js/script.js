@@ -3,8 +3,9 @@ var previousMedia = [];
 var previousKeyword = [];
 var btnSearch = document.getElementById("searchBtn");
 
-// Search Button Event Listener
-btnSearch.addEventListener("click", function(e){
+
+//Search Function
+function search(e){
     e.preventDefault();
     document.getElementById("searchResults").innerHTML="";
     var search = document.getElementById("search");
@@ -66,6 +67,9 @@ btnSearch.addEventListener("click", function(e){
 
     previousKeyword.unshift(search.value);
     localStorage.setItem("previousKeyword", JSON.stringify([previousKeyword]));
-})
+}
+
+// Search Button Event Listener
+btnSearch.addEventListener("click", search)
 
 
