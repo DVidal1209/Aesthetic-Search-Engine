@@ -1,9 +1,6 @@
 /* Adjusts the background color of the page as well as the entire pages left and right borders.*/
 body {
     background-color: lavenderblush;
-    margin:0;
-    padding:0;
-    overflow-x:hidden;
 }
 
 /* Adjusts the font of "Aesthetic Search Engine" is adjusted as well as the background color of the header section*/
@@ -44,7 +41,7 @@ header {
     color: lavenderblush;
     border-width: 8px;
     padding: 10px;
-    margin: 10px;
+    margin: auto;
     justify-content: center;
     flex-direction: column;
     color: var(--text-color);
@@ -90,6 +87,7 @@ embed {
 /* Adjusts the background color of the footer section and sets its contents toward the end of the footer.*/
 footer {
     display:flex;
+    justify-content: flex-end;
     background-color: lightskyblue;
     position: fixed;
     bottom: 0px;
@@ -100,7 +98,6 @@ footer {
 /* Centers the contents of the footer from the top and bottom.*/
 footer .footer-right {
     display:flex;
-    justify-content: flex-end;
     align-items:center;
 }
 
@@ -119,4 +116,48 @@ footer .footer-right {
 
 main {
     margin-bottom: 40px;
+}
+
+/* Styling for history of previous searches */
+.previousSearch{
+    display: flex;
+    justify-content: center;
+    width: 85%;
+    margin: 2px;
+}
+
+/* Styling for X to close history display */
+.close{
+    display: flex;
+    position: fixed;
+    right: 20px;
+    top: 0;
+}
+
+/* Styling for the history button */
+#showHistory{
+    background-color: lavenderblush;
+    color: lightskyblue;
+    border: dotted;
+    margin-right: 15px;
+}
+
+/* Styling for the history */
+#history{
+    display: none;
+    position: fixed;
+    align-items: center;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    background-color: lightskyblue;
+    flex-direction: column;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+
+/* Styling for previous search buttons */
+.historyContent{
+    width: 100%;
 }

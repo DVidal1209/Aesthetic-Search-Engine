@@ -3,6 +3,9 @@ var previousMedia = [];
 var previousKeyword = [];
 var btnSearch = document.getElementById("searchBtn");
 var historyEl = document.getElementById("history");
+var historyBtn = document.getElementById("showHistory");
+var close = document.querySelector(".close");
+var historyContent = document.querySelector(".historyContent");
 
 //Search Function
 function search(e){
@@ -73,19 +76,17 @@ function search(e){
     //Add local storage for previous searches (keywords and drop-down menu items)
     previousMedia.unshift(format.value);
     localStorage.setItem("previousMedia", JSON.stringify(previousMedia));
-    console.log("saved format")
     previousKeyword.unshift(search.value);
     localStorage.setItem("previousKeyword", JSON.stringify(previousKeyword));
-    console.log("saved keyword")
     
-    historyEl.innerHTML = "";
+    historyContent.innerHTML = "";
     for (i=0; i<previousKeyword.length;i++){
         var btn = document.createElement("button");
         btn.setAttribute("class", "previousSearch");
         btn.innerHTML = (previousKeyword[i] + "<br>Format: " + previousMedia[i]);
         btn.setAttribute("data-format", previousMedia[i]);
         btn.setAttribute("data-search", previousKeyword[i]);
-        historyEl.appendChild(btn);
+        historyContent.appendChild(btn);
     }
 }
 
@@ -102,21 +103,42 @@ function init(){
             btn.innerHTML = (previousKeyword[i] + "<br>Format: " + previousMedia[i]);
             btn.setAttribute("data-format", previousMedia[i]);
             btn.setAttribute("data-search", previousKeyword[i]);
-            historyEl.appendChild(btn);
+            historyContent.appendChild(btn);
         }
     }
 }
 
-console.log("init")
-init()
 
 // Search Button Event Listener
 btnSearch.addEventListener("click", search);
 
-// History button listener
+// History previous search button listener
 historyEl.addEventListener("click", function(event){
     event.preventDefault();
     if (event.target.classList.contains("previousSearch")){
         search(event);
     }
 })
+
+// History button listener to show history
+historyBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    historyEl.style.display="flex";
+})
+
+// Event Listener to close history area
+close.addEventListener("click", function(event){
+    event.preventDefault();
+    historyEl.style.display="none";
+})
+
+// Added event listener to search input box so the search button is clicked when the enter key is pressed
+document.getElementById("search")
+.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === 'Enter') {
+        btnSearch.click();
+    }
+});
+
+init()
