@@ -4,7 +4,6 @@ var previousKeyword = [];
 var btnSearch = document.getElementById("searchBtn");
 var historyEl = document.getElementById("history");
 var historyBtn = document.getElementById("showHistory");
-var close = document.querySelector(".close");
 var historyContent = document.querySelector(".historyContent");
 
 //Search Function
@@ -15,9 +14,8 @@ function search(e){
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
 
-
+    // Checks to see if the event being triggered is from the history section
     if (e.target.classList.contains("previousSearch")){
-
         search.value = e.target.dataset.search;
         format.value = e.target.dataset.format; 
     }
@@ -44,19 +42,19 @@ function search(e){
         for(var i=0; i<20; i++){
             try{
                 // Create embed images from Imgur album
-                if (e.data[i].link){
-                    // Create embed images from Imgur Image
-                    var item = document.createElement("embed");
-                    item.setAttribute("src", e.data[i].link);
-                    item.setAttribute("class", "emb");
-                    results.appendChild(item);
-                } else {
+                if (Array.isArray(e.data[i].images)){
                     for(var v=0;v<e.data[i].images.length;v++){
                         var item = document.createElement("embed");
                         item.setAttribute("src", e.data[i].images[v].link);
                         item.setAttribute("class", "emb");
                         results.appendChild(item);
                     }
+                } else {
+                    // Create embed images from Imgur Image
+                    var item = document.createElement("embed");
+                    item.setAttribute("src", e.data[i].link);
+                    item.setAttribute("class", "emb");
+                    results.appendChild(item);
                 }
             }
             catch{
@@ -90,7 +88,7 @@ function search(e){
     }
 }
 
-
+// Function to initialize the page
 function init(){
     if(localStorage.previousKeyword === null || localStorage.previousKeyword === undefined){
         return;
@@ -112,11 +110,30 @@ function init(){
 // Search Button Event Listener
 btnSearch.addEventListener("click", search);
 
-// History previous search button listener
+// Click handler for history area (includes previous searches, and close history)
 historyEl.addEventListener("click", function(event){
     event.preventDefault();
     if (event.target.classList.contains("previousSearch")){
         search(event);
+    } else if (event.target.classList.contains("close")){
+        historyEl.style.display="none";
+    } else if (event.target.classList.contains("reset")){
+        historyEl.innerHTML="";
+        var spanClose = document.createElement("span");
+        spanClose.setAttribute("class", "close");
+        spanClose.innerHTML="&#10006;"
+        var spanContent = document.createElement("span");
+        spanContent.setAttribute("class", "historyContent");
+        var resetBtn = document.createElement("button");
+        resetBtn.setAttribute("class", "reset");
+        resetBtn.innerHTML = "Reset";
+        localStorage.removeItem("previousMedia");
+        localStorage.removeItem("previousKeyword");
+        previousMedia = [];
+        previousKeyword = [];
+        historyEl.appendChild(spanClose);
+        historyEl.appendChild(spanContent);
+        historyEl.appendChild(resetBtn);
     }
 })
 
@@ -126,11 +143,6 @@ historyBtn.addEventListener("click", function(event){
     historyEl.style.display="flex";
 })
 
-// Event Listener to close history area
-close.addEventListener("click", function(event){
-    event.preventDefault();
-    historyEl.style.display="none";
-})
 
 // Added event listener to search input box so the search button is clicked when the enter key is pressed
 document.getElementById("search")
@@ -141,4 +153,5 @@ document.getElementById("search")
     }
 });
 
+// calls initialization function on page startup
 init()

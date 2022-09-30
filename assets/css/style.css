@@ -107,7 +107,7 @@ footer .footer-right {
     font-size:22px;
 }
 
-/* Adjusts the font size and weight of "Email" and "Return To Top." It also applies padding between those two and well as the end of the page.*/
+/* Adjusts the font size and weight of "Email", the History button and "Return To Top." It also applies padding between those two and well as the end of the page.*/
 .footer-right a {
     padding-right:25px;
     font-size:19px;
@@ -130,8 +130,13 @@ main {
 .close{
     display: flex;
     position: fixed;
-    right: 20px;
+    right: 23px;
     top: 0;
+    font-size: 150%;
+}
+
+.close:hover{
+    cursor:default;
 }
 
 /* Styling for the history button */
