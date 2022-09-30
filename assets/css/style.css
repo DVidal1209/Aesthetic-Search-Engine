@@ -90,7 +90,7 @@ embed {
 footer {
     display:flex;
     background-color: lightskyblue;
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width: 100%;
 }
