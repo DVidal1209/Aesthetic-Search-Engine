@@ -2,15 +2,23 @@
 var previousMedia = [];
 var previousKeyword = [];
 var btnSearch = document.getElementById("searchBtn");
+var historyEl = document.getElementById("history");
+var historyBtn = document.getElementById("showHistory");
+var historyContent = document.querySelector(".historyContent");
 
-// Search Button Event Listener
-btnSearch.addEventListener("click", function(e){
+//Search Function
+function search(e){
     e.preventDefault();
     document.getElementById("searchResults").innerHTML="";
     var search = document.getElementById("search");
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
 
+    // Checks to see if the event being triggered is from the history section
+    if (e.target.classList.contains("previousSearch")){
+        search.value = e.target.dataset.search;
+        format.value = e.target.dataset.format; 
+    }
     // Giphy API call
     fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + search.value + "%20" +format.value + "&limit=20&offset=0&rating=g&lang=en")
     .then(function(response){
@@ -31,22 +39,26 @@ btnSearch.addEventListener("click", function(e){
         return response.json()
     })
     .then (function(e){
-        for(var i=0;i<e.data.length;i++){
+        for(var i=0; i<20; i++){
             try{
                 // Create embed images from Imgur album
-                for(var v=0;v<e.data[i].images.length;v++){
+                if (Array.isArray(e.data[i].images)){
+                    for(var v=0;v<e.data[i].images.length;v++){
+                        var item = document.createElement("embed");
+                        item.setAttribute("src", e.data[i].images[v].link);
+                        item.setAttribute("class", "emb");
+                        results.appendChild(item);
+                    }
+                } else {
+                    // Create embed images from Imgur Image
                     var item = document.createElement("embed");
-                    item.setAttribute("src", e.data[i].images[v].link);
+                    item.setAttribute("src", e.data[i].link);
                     item.setAttribute("class", "emb");
                     results.appendChild(item);
                 }
             }
             catch{
-                // Create embed images from Imgur Image
-                var item = document.createElement("embed");
-                item.setAttribute("src", e.data[i].link);
-                item.setAttribute("class", "emb");
-                results.appendChild(item);
+                return;
             }
         }
     })
@@ -61,11 +73,85 @@ btnSearch.addEventListener("click", function(e){
 
     //Add local storage for previous searches (keywords and drop-down menu items)
     previousMedia.unshift(format.value);
-    localStorage.setItem("previousMedia", JSON.stringify([previousMedia]));
-
-
+    localStorage.setItem("previousMedia", JSON.stringify(previousMedia));
     previousKeyword.unshift(search.value);
-    localStorage.setItem("previousKeyword", JSON.stringify([previousKeyword]));
+    localStorage.setItem("previousKeyword", JSON.stringify(previousKeyword));
+    
+    historyContent.innerHTML = "";
+    for (i=0; i<previousKeyword.length;i++){
+        var btn = document.createElement("button");
+        btn.setAttribute("class", "previousSearch");
+        btn.innerHTML = (previousKeyword[i] + "<br>Format: " + previousMedia[i]);
+        btn.setAttribute("data-format", previousMedia[i]);
+        btn.setAttribute("data-search", previousKeyword[i]);
+        historyContent.appendChild(btn);
+    }
+}
+
+// Function to initialize the page
+function init(){
+    if(localStorage.previousKeyword === null || localStorage.previousKeyword === undefined){
+        return;
+    } else {
+        previousKeyword = JSON.parse(localStorage.getItem("previousKeyword"));
+        previousMedia = JSON.parse(localStorage.getItem("previousMedia"));
+        for (i=0; i<previousKeyword.length;i++){
+            var btn = document.createElement("button");
+            btn.setAttribute("class", "previousSearch");
+            btn.innerHTML = (previousKeyword[i] + "<br>Format: " + previousMedia[i]);
+            btn.setAttribute("data-format", previousMedia[i]);
+            btn.setAttribute("data-search", previousKeyword[i]);
+            historyContent.appendChild(btn);
+        }
+    }
+}
+
+
+// Search Button Event Listener
+btnSearch.addEventListener("click", search);
+
+// Click handler for history area (includes previous searches, and close history)
+historyEl.addEventListener("click", function(event){
+    event.preventDefault();
+    if (event.target.classList.contains("previousSearch")){
+        search(event);
+    } else if (event.target.classList.contains("close")){
+        historyEl.style.display="none";
+    } else if (event.target.classList.contains("reset")){
+        historyEl.innerHTML="";
+        var spanClose = document.createElement("span");
+        spanClose.setAttribute("class", "close");
+        spanClose.innerHTML="&#10006;"
+        var spanContent = document.createElement("span");
+        spanContent.setAttribute("class", "historyContent");
+        var resetBtn = document.createElement("button");
+        resetBtn.setAttribute("class", "reset");
+        resetBtn.innerHTML = "Clear History";
+        localStorage.removeItem("previousMedia");
+        localStorage.removeItem("previousKeyword");
+        previousMedia = [];
+        previousKeyword = [];
+        historyEl.appendChild(spanClose);
+        historyEl.appendChild(spanContent);
+        historyEl.appendChild(resetBtn);
+    }
+})
+
+// History button listener to show history
+historyBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    historyEl.style.display="flex";
 })
 
 
+// Added event listener to search input box so the search button is clicked when the enter key is pressed
+document.getElementById("search")
+.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === 'Enter') {
+        btnSearch.click();
+    }
+});
+
+// calls initialization function on page startup
+init()

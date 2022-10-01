@@ -6,8 +6,8 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
     <title>Aesthetic Search Engine</title>
 
 	<!--Additional elements for browsers and robots go here goes here-->
@@ -15,10 +15,8 @@
 </head>
 
 <body>
-    <!-- This <a> tag #top is the point that the Return To Page href referenced in the footer takes you to.-->
-    <a id='top'></a>
     <!-- Header -->
-    <header>
+    <header id="top">
         <h1>Aesthetic Search Engine</h1>
     </header>
 
@@ -39,18 +37,17 @@
         <div class="container">
             <h2>Aesthetic Search Engine</h2>
             <input type="text" placeholder="Enter keywords here..." id="search">
-            <select name="format" id="format">
-                <option value="select">Select a media type...</option>
-                <option value="pictures">Pictures</option>
-                <option value="gifs">Gifs</option>
-                <option value="landscapes">Landscapes</option>
-                <option value="paintings">Paintings</option>
+            <select name="format" id="format">  
+                <option id="1" value="Pictures">Pictures</option>
+                <option id="2" value="Gifs">Gifs</option>
+                <option id="3" value="Landscapes">Landscapes</option>
+                <option id="4" value="Paintings">Paintings</option>
             </select>
             <button id="searchBtn">Search</button>
         </div>
-        <div id="searchResults"></div>       
-    </main>
-
+        <div id="searchResults"></div>
+    </main>       
+    
     <!-- Footer. Font color of h3 and the href tags adjusted here instead of css.-->
     <footer>
         <div class="footer-right" style="color: lavenderblush">
@@ -58,9 +55,17 @@
             <a href = "lisa_c_swain@hotmail.com" style="color: lavenderblush">Email</a>
             <!-- This href tag takes you to the top of the webpage.-->
             <a href = "#top" style="color: lavenderblush">Return To Top</a>
+            <button id="showHistory">
+                History
+            </button>
         </div>
     </footer>
-
+    <div id="history">
+        <span class="close">&#10006;</span>
+        <span class="historyContent"></span>
+        <button class="reset">Clear History</button>
+    </div>
+    
     <script src="./assets/js/script.js"></script>
 </body>
 
