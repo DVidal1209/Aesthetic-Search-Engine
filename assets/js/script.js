@@ -14,12 +14,12 @@ function search(e){
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
     var searchData;
-    if(format.id==="none"){
+    if(format.value==="none"){
         searchData = search.value;
     } else {
         searchData = search.value + " " + format.value;
     }
-    
+
     // Checks to see if the event being triggered is from the history section
     if (e.target.classList.contains("previousSearch")){
         search.value = e.target.dataset.search;
