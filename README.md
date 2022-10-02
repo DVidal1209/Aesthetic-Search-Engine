@@ -6,7 +6,7 @@ interior design, art, and so on.
 
 Below that is a box with a search bar and dropdown menu. Enter a keyword for your aesthetic, select a type of media
 from the dropdown menu, and press the search button! Once you hit search, results in the form of images and gifs will
-populate the screen below the search box. As you scroll, the footer containing our contact information, a "Return to
+populate the screen below the search box. As you scroll, the footer containing our contact information (teamsalt.cwru@gmail.com), a "Return to
 Top" button, and a search history button will follow you down the page for easy access. 
 
 If you'd like to view your recent searches, click the "History" button and a tab listing them will open. To clear your 
