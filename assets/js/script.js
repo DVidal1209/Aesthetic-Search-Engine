@@ -14,6 +14,8 @@ function search(e){
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
     var searchData;
+
+    // Checks to see whether or not a media type selection has been make
     if(format.value==="none"){
         searchData = search.value;
     } else {
