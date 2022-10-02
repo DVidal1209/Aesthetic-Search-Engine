@@ -1,6 +1,7 @@
 # Project 1: Aesthetic Search Engine
-## Find your aesthetic with inspirational gifs and images.
+Find your aesthetic with inspirational gifs and images.
 
+## Description 
 When you enter [our application](https://dvidal1209.github.io/project-1/), you'll see a header with different inspiration photos for fashion, 
 interior design, art, and so on. 
 
@@ -16,10 +17,10 @@ on them from the History tab.
 We used HTML, CSS, Bulma (for the search box positioning), and JavaScript for the functionality. We also used the
 Imgur and Giphy APIs to pull our search results from. 
 
-
+## Screenshot
 ![Aesthetic Search Engine Preview](https://github.com/DVidal1209/project-1/blob/petra2/Project%20Screenshot.png?raw=true)
 
-License:
+## License
 MIT License
 
 Copyright (c) [2022] [TeamSalt]
