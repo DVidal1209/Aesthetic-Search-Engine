@@ -118,22 +118,11 @@ historyEl.addEventListener("click", function(event){
     } else if (event.target.classList.contains("close")){
         historyEl.style.display="none";
     } else if (event.target.classList.contains("reset")){
-        historyEl.innerHTML="";
-        var spanClose = document.createElement("span");
-        spanClose.setAttribute("class", "close");
-        spanClose.innerHTML="&#10006;"
-        var spanContent = document.createElement("span");
-        spanContent.setAttribute("class", "historyContent");
-        var resetBtn = document.createElement("button");
-        resetBtn.setAttribute("class", "reset");
-        resetBtn.innerHTML = "Clear History";
+        historyContent.innerHTML="";
         localStorage.removeItem("previousMedia");
         localStorage.removeItem("previousKeyword");
         previousMedia = [];
         previousKeyword = [];
-        historyEl.appendChild(spanClose);
-        historyEl.appendChild(spanContent);
-        historyEl.appendChild(resetBtn);
     }
 })
 
