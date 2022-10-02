@@ -13,14 +13,20 @@ function search(e){
     var search = document.getElementById("search");
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
-
+    var searchData;
+    if(format.id==="none"){
+        searchData = search.value;
+    } else {
+        searchData = search.value + " " + format.value;
+    }
+    
     // Checks to see if the event being triggered is from the history section
     if (e.target.classList.contains("previousSearch")){
         search.value = e.target.dataset.search;
         format.value = e.target.dataset.format; 
     }
     // Giphy API call
-    fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + search.value + "%20" +format.value + "&limit=20&offset=0&rating=g&lang=en")
+    fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + searchData + "&limit=20&offset=0&rating=g&lang=en")
     .then(function(response){
         return response.json()
     })
@@ -34,7 +40,7 @@ function search(e){
         }
     })
     // imgur API call
-    fetch("https://api.imgur.com/3/gallery/search/?client_id=5e93bca5a9f11ff&client_secret=f83fdaa89a4073b6c0fcce78cda83b9894979360&perPage=5&q=" + search.value +  "%20" + format.value )
+    fetch("https://api.imgur.com/3/gallery/search/?client_id=5e93bca5a9f11ff&client_secret=f83fdaa89a4073b6c0fcce78cda83b9894979360&perPage=5&q=" + searchData )
     .then(function(response){
         return response.json()
     })
