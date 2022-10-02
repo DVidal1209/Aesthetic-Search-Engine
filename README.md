@@ -17,4 +17,4 @@ We used HTML, CSS, Bulma (for the search box positioning), and JavaScript for th
 Imgur and Giphy APIs to pull our search results from. 
 
 
-![alt-text](insert screenshot)
+![Aesthetic Search Engine Preview](https://github.com/DVidal1209/project-1/blob/petra2/Project%20Screenshot.png?raw=true)
