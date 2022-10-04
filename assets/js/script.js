@@ -14,7 +14,13 @@ function search(e){
     var results = document.getElementById("searchResults");
     var format = document.getElementById("format");
     var searchData;
-
+    
+    // Checks to see if the event being triggered is from the history section
+    if (e.target.classList.contains("previousSearch")){
+        search.value = e.target.dataset.search;
+        format.value = e.target.dataset.format; 
+    }
+    
     // Checks to see whether or not a media type selection has been make
     if(format.value==="none"){
         searchData = search.value;
@@ -22,11 +28,6 @@ function search(e){
         searchData = search.value + " " + format.value;
     }
 
-    // Checks to see if the event being triggered is from the history section
-    if (e.target.classList.contains("previousSearch")){
-        search.value = e.target.dataset.search;
-        format.value = e.target.dataset.format; 
-    }
     // Giphy API call
     fetch("https://api.giphy.com/v1/gifs/search?api_key=bwocb4KLlWPjMVn0GRDP3Dnzb0jsGyhW&q=" + searchData + "&limit=20&offset=0&rating=g&lang=en")
     .then(function(response){
